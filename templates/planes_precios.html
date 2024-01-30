@@ -1,0 +1,106 @@
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.1/css/bootstrap.min.css" integrity="sha512-0smfgDf7L/B8WtfxAA7Vq3Hu0E3fV+iZntY+1VVvq5d5/b+NL5jCm//9L9egnCZBzBlCG72mGZwFxMnB6fkzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Suscríbete</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cabin_APP/css/inicio.css' %}">
+    <link rel="icon" href="../static/img/logo_99.png"type="image/png">
+
+    <nav class="navbar-fixed fixed-top bgcolor" style="background-color: rgb(11, 11, 11);">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="enlace">
+            <img src="../static/img/logo2.png" alt="" class="logo">
+        </div>
+        <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'menu_principal' %}">Iniciar sesion</a></li>
+        </ul>
+        
+    </nav>
+</head>
+<body>
+    <div class="precios" id="precios" style=" background-image: url(../static/img/fondo_inicio.jpg); ">
+        <h1  style="font-weight: bold; color: rgb(212, 132, 19); text-align: center; padding-bottom: 4%; font-size: 300%;">Nuestros planes</h1>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3">
+                <div class="col plantillas" style="padding-bottom: 5%;">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Plan Mensual</h5>
+                      <div class="price">$7.990 CLP</div>
+                      <hr>
+                      <p>Obtén acceso completo a todas nuestras características por solo $7.990CLP al mes. Ideal para una gestión mensual sin complicaciones.</p>
+                      <hr>
+                      <br>
+                      <a href="https://api.whatsapp.com/send?phone=56965108372&text=Hola,%20quiero%20contratar%20el%20plan%20mensual%20de%20$7.990CLP.%20¿Cuáles%20son%20los%20pasos%20a%20seguir?" target="_blank" class="btn btn-success">¡Conseguir!</a> 
+                    </div>
+                  </div>
+                </div>
+                <div class="col plantillas" style="padding-bottom: 5%;">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Plan 3Meses</h5>
+                      <div class="price">$20.990 CLP</div>
+                      <hr>
+                      <p>¡Ahorra con nuestro plan trimestral! Por solo $20.990CLP cada tres meses, disfruta de todos los beneficios mientras mantienes tus proyectos bajo control.</p>
+                      <hr>
+                      <br>
+                      <a href="https://api.whatsapp.com/send?phone=56965108372&text=Hola,%20quiero%20contratar%20el%20plan%203%20meses%20por%20$20.990CLP.%20¿Cuáles%20son%20los%20pasos%20a%20seguir?" target="_blank" class="btn btn-success">¡Conseguir!</a>
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="col plantillas" style="padding-bottom: 5%;">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Plan Anual</h5>
+                      <div class="price">$58.990 CLP</div>
+                      <hr>
+                      <p>Aprovecha al máximo tus herramientas de gestión durante todo el año con nuestro plan anual por $58.990CLP. Trabaja sin complicaciones</p>
+                      <hr>
+                      <br>
+                      <a href="https://api.whatsapp.com/send?phone=56965108372&text=Hola,%20quiero%20contratar%20el%20plan%20anual%20de%20$58.990CLP.%20¿Cuáles%20son%20los%20pasos%20a%20seguir?" target="_blank"class="btn btn-success">¡Conseguir!</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-lg-3 g-1 g-lg-3">
+            <div class="col">
+              <img src="../static/img/logo2.png" alt="Logo de la empresa">
+            </div>
+            <div class="col contacto">
+              <h3 style="overflow-y: hidden;">Contacto</h3>
+                <p><i class="fas fa-envelope"></i> Dominatuproyecto@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +(56) 9 65108372</p>
+            </div>
+            <div class="col">
+              <h3 style="overflow-y: hidden;">Ingresar</h3>
+                <a href="{% url 'menu_principal' %}" ><p class="ingreso">Iniciar Sesion</p></a>
+                <a href="{% url 'planes_precios' %}" ><p class="ingreso">Suscríbete</p></a>
+            </div>
+          </div>
+          </div>
+          
+        <!-- Copyright -->
+        <hr>
+        <div class="text-center" style="background-color: rgba(0, 0, 0, 0);">
+          Copyright © 2023/ Desarrollado por Felipe Parra. Todos los derechos reservados.                                
+        </div>
+      </footer>
+
+  </body>

@@ -1,0 +1,109 @@
+{% extends "navbar.html" %}
+{% block title %}Registro materiales{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block onload %}
+{% block body %}
+    <section class="vh-100" style="background-image: url('/static/img/materiales2.jpg'); background-size: cover; ">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-10">
+              <br><br>
+              <div class="card shadow-2-strong" style="border-radius: 2rem; background-color: rgba(180, 180, 183, 0.56); ">
+                <div class="card-body p-5 text-center">
+                  <div class="titulo_RM"><h2 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 30 0px; color: rgb(2, 2, 2); font-size: 350%;">Registrar material</h2></div>
+                  <form method="POST">
+                    {% csrf_token %}
+                    {% if messages %}
+                    {% for m in messages %}
+                      <script>
+                        Swal.fire({
+                          "title": "¡Bien hecho!",
+                          "text": "{{m}}",
+                          "icon": "success",
+                          showCancelButton: true,
+                          cancelButtonText: 'Registrar nuevo material',
+                          cancelButtonColor: 'rgb(15, 225, 15)',
+                          confirmButtonText: 'Ver materiales',
+                          confirmButtonColor: 'rgb(17, 47, 236)'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                              window.location.href = "{% url 'listar_materiales' %}";
+                            }
+                            else{
+                                window.location.href = "{% url 'registrar_material' %}";
+                            }  
+                          })
+                      </script>
+                    {% endfor%}
+                  {% endif %}
+
+                  <div class="container"><div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3">
+                    <div class="col">
+                      <div class="form-floating">
+                        {{form.username}}{{form.nombre}}{{form.cantidad_disponible}}{{form.total}}{{form.proyectos_asociados}}{{form.estado}}
+                      <label for="floatingPassword">Nombre</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.cantidad }}
+                      <label for="floatingPassword">Cantidad</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.facturas }}
+                      <label for="floatingPassword" style="color: rgb(7, 7, 7); font-size: 19px;">Asociar factura</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.boletas }}
+                      <label for="floatingPassword" style="color: rgb(7, 7, 7); font-size: 19px;">Asociar boleta</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.precio }}
+                      <label for="floatingPassword">Precio unitario</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.lugar_de_compra }}
+                      <label for="floatingPassword">Proovedor</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.fecha_compra }}
+                      <label for="floatingPassword">Fecha de compra</label>
+                      </div>
+                    </div>
+                    
+                    <div class="col">
+                      <div class="form-floating">
+                        {{ form.observacion }}
+                      <label for="floatingPassword">Observación</label>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar material</button>
+                    <br>
+                    <br>
+                    <a onclick="window.history.back();" type="button" class="btn btn-warning">Volver</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+{% endblock onload %}
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "navbar.html" %}
+{% block title %}Cambiar email{% endblock %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        height: 100vh; /* 100% de la altura de la ventana */
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    form {
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    input[type="password"] {
+        width: 100%;
+        padding: 10;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<body style="background-image: url(../static/img/fondoMenuPrincipal.jpg); background-size: cover;">
+  <form method="post">
+    <h2>Cambiar email usuario</h2>
+    <br><br>
+      {% csrf_token %}
+      <label for="nuevo_nombre">Nuevo email usuario:</label>
+      <input class="form-control" type="text" id="nuevo_email" name="nuevo_email" required>
+      <br>
+      <br>
+      <button type="submit" style="justify-content: center;">Cambiar email</button>
+      <br><br>
+  </form>
+</body>
+</html>
+{% endblock %}

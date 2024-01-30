@@ -1,0 +1,42 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% block title %}menu proyecto/maestro{% endblock %}
+{% block content %}
+<body style="background-image: url('/static/img/fondoMenuPrincipal.jpg'); background-size: cover; ">
+    <div class="container">
+        <div class="row" style="margin-left: 15%; padding-top: 180px;">
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);">
+                    <img src={% static 'img/proyecto4.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Mis proyectos</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre y/o revise sus proyectos actuales o antiguos.</p>
+                    <a href="{% url 'formulario_proyecto' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    <a href="{% url 'listar_proyecto' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252); margin-left: 10px;">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);" >
+                    <img src={% static 'img/maestro.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Mis maestros</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre y/o revise sus maestros con sus trabajos y pagos correspondientes.</p>
+                    <a href="{% url 'registrar_maestro' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    <a href="{% url 'listar_maestro' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252); margin-left: 10px;">Visualizar</a>
+                    
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+    <br><br><br>
+</body>
+{% endblock %}

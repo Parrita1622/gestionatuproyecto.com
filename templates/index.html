@@ -1,0 +1,215 @@
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.1/css/bootstrap.min.css" integrity="sha512-0smfgDf7L/B8WtfxAA7Vq3Hu0E3fV+iZntY+1VVvq5d5/b+NL5jCm//9L9egnCZBzBlCG72mGZwFxMnB6fkzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Domina tu proyecto el mejor sitio para gestionar tu proyecto de vivienda, cabañas o construcción sin complicaciones</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cabin_APP/css/inicio.css' %}">
+    <link rel="icon" href="../static/img/logo_99.png"type="image/png">
+
+    <nav class="navbar-fixed fixed-top bgcolor">
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <div class="enlace">
+            <img src="../static/img/logo2.png" alt="" class="logo">
+        </div>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="{% url 'planes_precios' %}">Suscríbete</a></li>
+            <li><a href="{% url 'menu_principal' %}">Iniciar sesion</a></li>
+        </ul>
+        
+    </nav>
+</head>
+<body style="background-image: url(../static/img/fondo_inicio.jpg);">
+    <div class="section1">
+        <img src="../static/img/logo7.png" class="imagen_logo" alt=""  data-aos="zoom-in" data-aos-duration="2000">
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="../static/img/foto_inicio4.1.jpeg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="../static/img/foto_inicio2.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="../static/img/foto_inicio5.jpg" class="d-block w-100" alt="600px">
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="titulo1" style="text-align: center; color: rgb(3, 3, 3); margin-top: 100px; margin-bottom: 100px; font-size: 16px;">
+      <h1 style="font-size: 300%;  margin-bottom: 90px; color: rgb(212, 132, 19);" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">¿Qué Implica...?</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-1">
+                <p class="parrafo1" style="text-align: justify; border: 5px; font-weight: bold;">En Domina Tu Proyecto, te ofrecemos un completo sistema de gestión de proyectos diseñado para proporcionarte un seguimiento integral de tus proyectos de construcción, ya sea tu casa, cabaña u obras más grandes.<br><br> Nuestra plataforma te permite registrar con precisión los precios de los materiales, llevar un control de los maestros, gestionar facturas y boletas, y vincular todos estos aspectos de manera sencilla y efectiva. Con esta herramienta simplificada, la administración de tus proyectos se vuelve más eficiente y organizada, permitiéndote tomar el control de tu proceso de construcción de manera efectiva.</p>
+            </div>
+            <div class="col-md-6 order-md-2">
+              <img src="../static/img/pc.jpg" alt="Imagen" style="border-radius: 5px; width: 70%;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="titulo1" style="text-align: center; color: rgb(3, 3, 3); margin-top: 180px; margin-bottom: 100px; font-size: 16px;">
+      <h1 style="font-size: 300%;  margin-bottom: 90px; color: rgb(212, 132, 19);" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">¿Como crear mi cuenta?</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-1">
+                <p class="parrafo1" style="text-align: justify; border: 5px; font-weight: bold;">Actualmente, nuestra aplicación está en constante desarrollo y, aunque hemos implementado muchas características poderosas, aún no contamos con un sistema de pagos completamente integrado.<br><br>
+                  Para facilitar el proceso de adquisición de nuestros servicios, hemos establecido un método sencillo y seguro. Una vez que hayas elegido el plan que mejor se adapte a tus necesidades, te proporcionaremos los detalles para realizar una transferencia directa al administrador. <br><br>
+                  Después de realizar la transferencia, simplemente notifícanos y procederemos a configurar tu cuenta. Te enviaremos tus credenciales de inicio de sesión, las cuales podrás cambiar según tus preferencias desde el menú de ajustes. Este enfoque nos permite ofrecerte un servicio personalizado y asegurarnos de que tengas el control total de tu cuenta desde el primer momento. <br><br> 
+                  Agradecemos tu comprensión mientras trabajamos para mejorar y ofrecer una experiencia completa en todos los aspectos de nuestra aplicación. ¡Esperamos que disfrutes utilizando Domina tu proyecto.com y estamos aquí para ayudarte en cada paso del camino!
+                  
+                  </p>
+            </div>
+            <div class="col-md-6 order-md-2">
+              <img src="../static/img/manos.jpg" alt="Imagen" style="border-radius: 5px; width: 70%;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section2" style="background-image: url(../static/img/imagensection2.jpg); background-size: cover; text-align: center;">
+      <h1 style="font-size: 300%; margin-bottom: 90px; color: rgb(212, 132, 19); " data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Un Recorrido Por Nuestra Iniciativa</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-1">
+              <img src="../static/img/menu_principalD.png" alt="Imagen" style="border-radius: 5px; width: 100%; margin-bottom: 5%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+            </div>
+            <div class="col-md-6 order-md-2">
+              <p class="parrafo2" style="text-align: justify; font-weight: bold;">En el menú principal, encontrarás tres opciones distintas para comenzar a gestionar tu proyecto: registrar maestros/proyecto, registrar material y registrar factura/boleta. La elección de por dónde empezar queda en tus manos, permitiéndote iniciar la organización de tu proyecto de la manera que mejor se adapte a tus necesidades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section3" >
+      <h1 style="font-size: 300%; margin-bottom: 90px; color: rgb(212, 132, 19); text-align: center; " data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Secciones</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-2" style="margin-bottom: 5%;">
+              <img src="../static/img/pro_ma1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+          </div>
+          <div class="col-md-6 order-md-1">
+            <p class="parrafo1" style="text-align: justify; font-weight: bold;">Dentro de la sección 'Proyecto/Maestro', encontrarás dos opciones fundamentales. La primera te permite registrar o visualizar tus proyectos, cada uno de ellos vinculado con su respectivo material o factura/boleta asociada. Por otro lado, tendrás la opción de registrar o consultar información sobre tus maestros y asociarlos a un proyecto específico según tus necesidades.</p>
+          </div>
+        </div>
+        <div class="row" >
+          <div class="col-md-6 order-md-1"style="margin-bottom: 5%;">
+            <img src="../static/img/fac_bol1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+        </div>
+        <div class="col-md-6 order-md-2">
+          <p class="parrafo1" style="text-align: justify; font-weight: bold;">En la sección 'Factura/Boleta', descubrirás dos opciones clave: la primera te permite registrar o consultar facturas, y la otra para realizar acciones similares con boletas. Ambas opciones pueden asociarse a uno o varios proyectos, donde podrás definir sus respectivos precios y materiales relacionados.</p>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-6 order-md-2"style="margin-bottom: 5%;">
+          <img src="../static/img/material1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+      </div>
+      <div class="col-md-6 order-md-1">
+        <p class="parrafo1" style="text-align: justify; font-weight: bold;">Dentro de la sección 'Materiales', encontrarás tu lista de materiales registrados. En caso de que no tengas un material registrado, podrás hacerlo fácilmente a través de un formulario en el que se te solicitará información como nombre, cantidad, precio, y factura/boleta asociada, entre otros detalles relevantes.</p>
+      </div>
+    </div>
+      </div>
+    </div>
+    <div class="section4" style="background-image: url(../static/img/listado_factura.jpg); background-size: cover; ">
+      <h1 style="font-size: 300%;  color: rgb(212, 132, 19); text-align: center;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Registros</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 order-md-2"style="margin-bottom: 5%;">
+            <img src="../static/img/registro_proyecto1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+        </div> 
+        <div class="col-md-6 order-md-1">
+          <p class="parrafo2" style="text-align: justify; font-weight: bold;">Registra tu proyecto con la información precisa para validar tus ganancias, el tiempo estimado de construcción y la superficie donde se organizará todo en la vista del proyecto.</p>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 7%;">
+        <div class="col-md-6 order-md-1" style="margin-bottom: 5%;">
+          <img src="../static/img/registro_maestro1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+      </div>
+      <div class="col-md-6 order-md-2">
+        <p class="parrafo2" style="text-align: justify; font-weight: bold;">Registra a tus maestros ingresando los detalles del trabajo a realizar, el costo, el saldo inicial y el saldo pendiente, además de otros datos como su nombre y contacto para luego asociarlos a un proyecto específico.</p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 5%;">
+      <div class="col-md-6 order-md-2" style="margin-bottom: 5%;">
+        <img src="../static/img/registro_boleta1.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+    </div> 
+      <div class="col-md-6 order-md-1">
+        <p class="parrafo2" style="text-align: justify; font-weight: bold;">Registro de boletas/facturas: En esta sección, podrás registrar las boletas y facturas que vayas acumulando a lo largo del proyecto, cada una asociada a su proyecto correspondiente y con los materiales que vayas agregando en cada instancia.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="section5" >
+      <h1 style="font-size: 300%; margin-bottom: 90px; color: rgb(212, 132, 19); text-align: center;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">Vistas</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 order-md-2" style="margin-bottom: 5%;">
+            <img src="../static/img/factura2.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+        </div> 
+        <div class="col-md-6 order-md-1">
+          <p class="parrafo2" style="text-align: justify; font-weight: bold;">En esta vista de factura/boleta, podrás revisar de manera organizada todos los datos proporcionados al registrar tu factura o boleta, junto con los materiales registrados. Recuerda que cada factura o boleta se asocia a uno o más proyectos.</p>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 5%; " >
+        <div class="col-md-6 order-md-1" style="margin-bottom: 5%;">
+          <img src="../static/img/proyecto2.png" alt="Imagen" class="pro_ma" style="border-radius: 5px; width: 100%;" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+      </div> 
+        <div class="col-md-6 order-md-2">
+          <p class="parrafo2" style="text-align: justify; font-weight: bold;">En esta vista del proyecto, podrás visualizar de manera ordenada y de fácil acceso todos los materiales, maestros, facturas y boletas relacionados con el mismo. Además, en la parte inferior, encontrarás un resumen del monto total acumulado hasta la fecha en tu proyecto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-lg-3 g-1 g-lg-3">
+        <div class="col">
+          <img src="../static/img/logo2.png" alt="Logo de la empresa">
+        </div>
+        <div class="col contacto">
+          <h3 style="overflow-y: hidden;">Contacto</h3>
+            <p><i class="fas fa-envelope"></i> Dominatuproyecto@gmail.com</p>
+            <p><i class="fas fa-phone"></i> +(56) 9 6510 8372</p>
+        </div>
+        <div class="col">
+          <h3 style="overflow-y: hidden;">Ingresar</h3>
+            <a href="{% url 'menu_principal' %}" ><p class="ingreso">Iniciar Sesion</p></a>
+            <a href="{% url 'planes_precios' %}" ><p class="ingreso">Suscríbete</p></a>
+        </div>
+      </div>
+      </div>
+      
+    <!-- Copyright -->
+    <hr>
+    <div class="text-center" style="background-color: rgba(0, 0, 0, 0);">
+      Copyright © 2023/ Desarrollado por Felipe Parra. Todos los derechos reservados.                                
+    </div>
+  </footer>
+    
+
+    <script>
+        // javascript para las animaciones al hacer scroll
+        const navbar = document.querySelector('.navbar-fixed');
+        // pone un background-color al hacer scroll al navbar
+        window.addEventListener('scroll', () => {
+        if (window.scrollY > 0) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }});
+    </script>
+    <script>
+        AOS.init();
+    </script>
+</body>

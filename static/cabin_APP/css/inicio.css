@@ -1,0 +1,428 @@
+/* Estilos iniciales */
+.navbar-fixed {
+    height: 100px;
+    width: 100%;
+    overflow-y: hidden;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    /* Otros estilos de la barra de navegación */
+  }
+
+  
+  /* Estilos al hacer scroll */
+  .navbar-fixed.scrolled {
+    background-color: rgba(0, 0, 0, 0.974); /* Cambia el color al hacer scroll */
+    /* Otros estilos cuando se ha hecho scroll */
+  }
+  .navbar-fixed.scrolled ul li::before {
+    display: none;
+  }
+  .navbar-fixed.scrolled ul li:hover a {
+    color: rgb(255, 170, 0); /* Cambia el color de texto a azul al hacer hover */
+    background-color: transparent; /* Quita el fondo de los <li> al hacer hover */
+  }
+
+nav{
+    height: 100px;
+    width: 100%;
+    overflow-y: hidden;
+}
+.enlace{
+    position: absolute;
+    padding: 20px 50px;
+}
+.logo{
+    height: 3.1rem;
+    margin-left: 70px;
+}
+nav ul{
+    margin-top: 10px;
+    float: right;
+    margin-right: 200px;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+nav ul li::before { /* Seudoelemento para la línea blanca debajo de las etiquetas <li> */
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 60%;
+    height: 1.5px; /* Ajusta el grosor de la línea según tus preferencias */
+    background-color: #fff; /* Color de la línea blanca */
+}
+
+nav ul li a{
+    color: #f1eded;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: "";
+}
+li a.active, li a:hover{
+    color: #000000;
+    transition: .3s;
+    background-color: #f1ededad;
+}
+.checkbtn{
+    font-size: 30px;
+    color: #ffffff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+#check{
+    display: none;
+}
+.parrafo1{
+    background-color: #a7a4a450;
+    padding: 30;
+}
+
+.parrafo2{
+    padding: 30;
+    background-color: #eae7e7a6;
+    font-size: 16px;
+}
+
+.section2{
+    height: 90vh;
+    padding-top: 5%;
+    z-index: 3;
+}
+.section3{
+    padding-top: 5%;
+    height: 190vh;
+}
+
+.section4{
+    padding-top: 5%;
+    height: 260vh;
+}
+.section4 h1{
+    padding-bottom: 5%;
+}
+
+.section5{
+    padding-top: 5%;
+    height: 300vh;
+}
+
+.imagen_logo{
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    margin-left: 14%;
+    margin-top: 0%;
+    width: 70%;
+    /*justify-content: center; /* Centra horizontalmente */
+    /*align-items: center; /*Centra verticalmente */
+}
+.carousel{
+    position: relative;
+}
+.precios{
+    height: 110vh;
+    padding-top: 10%;
+    padding-bottom: 8%;
+}
+/* Estilo común para el footer */
+.footer {
+    background-color: #141313;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer .row{
+    margin-left: 10%;
+    
+}
+
+.footer img {
+    max-width: 400px;
+    padding-right: 100px;
+    padding-top: 50px;
+}
+
+.footer h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+
+.footer p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.footer .social-icons {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.ingreso{
+    color: white;
+}
+
+a{
+    text-decoration: none;
+}
+
+.section3{
+    padding-top: 50px;
+    height: calc(195vh);
+    background: linear-gradient(to bottom, #ffffff, #05050500);
+    overflow-y: hidden;
+}
+.section3 h1{
+    overflow-y: hidden;
+    font-family: "";
+    color: rgb(0, 0, 0);
+    font-size: 360%;
+    padding-top: 30px;
+    text-align: center;
+    margin-bottom: 120px;
+}
+.text_medio{
+    background: linear-gradient(to bottom, #ffffff, #0c0c0d);
+}
+
+
+.price {
+    color: #1d839a;
+    font-size: 44px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.card-title {
+    color: #ffffffcc;
+    font-size: 44px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    overflow-y: hidden;
+}
+
+.card p{
+    color: #ffffffcc;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card{
+    background-color: #0d0c0c;
+}
+.btn{
+    margin-left: 32%;
+    font-size: 130%;
+    margin-bottom: 20px;
+}
+@media (max-width: 1300px){
+    .enlace{
+        padding-left: 20px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+    .logo{
+        height: 1.7rem;
+        margin-left: 30px;
+        margin-top: 8%;
+    }
+    .section2{
+        height: 90vh;
+    }
+    
+    .section3{
+        height: 190vh;
+    }
+    .section3 h1{
+        padding-top: 3%;
+    }
+    
+    .section4{
+        height: 230vh;   
+    }
+
+    .section4 h1{
+        padding-top: 1%;
+    }
+    
+    .section5{
+        height: 265vh;
+    }
+
+    .section5 h1{
+        padding-top: 1%;
+    }
+}
+
+@media (max-width: 1058px){
+    .checkbtn{
+        display: block;
+        margin-top: 26px;
+        font-size: 38px;
+    }
+    nav{
+        background-color: #01070d;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #01070d;
+        top: 80px;  
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+        margin-right: 18px;
+        overflow-y: hidden;
+    }
+    nav ul li a{
+        font-size: 130%;
+    }
+    li a:hover, li a.active{
+        background: none;
+        color: rgb(8, 164, 81);
+    }
+    #check:checked ~ ul{
+        left:0;
+    }
+    .logo{
+        height: 2.7rem;
+        margin-left: 0%;
+        margin-top: 0;
+    }
+    .text-inicio{
+        margin-top: 150px;  
+        color: rgb(250, 250, 250); 
+        font-size: 250%;
+        margin-left: 40px;  
+    }
+    .parrafo-inicio{
+        color: white; 
+        font-size: 20px; 
+        margin-left: 0px; 
+        text-align: justify; 
+    }
+    section{
+        height: 120vh
+    }
+    .borde{
+        position: absolute;
+        transform: translateY(40%); /* Empiezan abajo */
+        animation: slideUp 1.5s ease 0.5s forwards; /* Animación de abajo hacia arriba */
+        width: 90%;
+        margin-left: 20px;
+    }
+    .pagina{
+        border-radius: 5px; 
+        left: 10.5%; 
+        width: 80%;
+        position: absolute;
+        bottom: -5px;
+        transform: translateY(38%); /* Empiezan abajo */
+        animation: slideUp 1.4s ease 0.5s forwards; /* Animación de abajo hacia arriba */
+    }
+    @keyframes slideUp {
+
+        to {
+            transform: translateY(0.5); /* Suben hasta su posición final */
+        }
+    }
+    .navbar-fixed {
+        height: 100px;
+        width: 100%;
+        overflow-y: hidden;
+        background-color: #01070d;
+        transition: background-color 0.3s ease;
+        /* Otros estilos de la barra de navegación */
+    }
+    .navbar-fixed.scrolled {
+        background-color: #01070dd9; /* Cambia el color al hacer scroll */
+        /* Otros estilos cuando se ha hecho scroll */
+    }
+    .imagen_logo{
+        margin-left: 8%;
+        width: 83%;
+        /*justify-content: center; /* Centra horizontalmente */
+        /*align-items: center; /*Centra verticalmente */
+    }
+    .carousel{
+        position: relative;
+        margin-top: 100px;
+    }
+    .section2{
+        height: 100vh;
+    }
+    .section3{
+        height: 190vh;
+    }
+    .section3 h1{
+        padding-top: 10%;
+    }
+    
+    .section4{
+        height: 220vh;   
+    }
+
+    .section4 h1{
+        padding-top: 10%;
+    }
+    
+    .section5{
+        height: 220vh;
+    }
+
+    .section5 h1{
+        padding-top: 10%;
+    }
+
+    .footer img {
+        max-width: 300px;
+        margin-left: 27px;
+        padding-top: 0;
+    }
+    
+    .footer h3 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        margin-left: 25%;
+        padding-top: 0;
+    }
+    
+    .footer p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        margin-left: 30px;
+        padding-top: 0;
+    }
+    .precios{
+        height: 200vh;
+        padding-top: 45%;
+    }
+
+    
+
+}

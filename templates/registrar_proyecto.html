@@ -1,0 +1,94 @@
+{% extends "navbar.html" %}
+{% block title %}Registro proyecto{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block onload %}
+{% block body %}
+    <section class="proyecto" style="background-image: url('/static/img/registrar_proyecto.jpg'); background-size: cover; ">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-7">
+              <div class="card shadow-2-strong" style="border-radius: 2rem; background-color: rgba(197, 197, 197, 0.715); ">
+                <div class="card-body p-5 text-center">
+                  <h2 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 30 0px; color: rgb(2, 2, 2); font-size: 300%;">Registrar proyecto</h2>
+                  <form method="POST" >
+                    {% csrf_token %}
+                    {% if messages %}
+                    {% for m in messages %}
+                      <script>
+                        Swal.fire({
+                          "title": "¡Bien hecho!",
+                          "text": "{{m}}",
+                          "icon": "success",
+                          showCancelButton: true,
+                          cancelButtonText: 'Registrar nuevo proyecto',
+                          cancelButtonColor: 'rgb(15, 225, 15)',
+                          confirmButtonText: 'Visualizar proyecto',
+                          confirmButtonColor: 'rgb(17, 47, 236)'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                              window.location.href = "{% url 'listar_proyecto' %}";
+                            }
+                            else{
+                                window.location.href = "{% url 'formulario_proyecto' %}";
+                            }  
+                          })
+                      </script>
+                    {% endfor%}
+                  {% endif %}
+                    <div class="container"><div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-3">
+                      <div class="col">
+                        <div class="form-floating">
+                          {{form.username}}{{form.nombre}}{{form.estado}}
+                        <label for="floatingPassword">Nombre</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating">
+                          {{ form.superficie }}
+                        <label for="floatingPassword">Superficie(m2)</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating">
+                          {{ form.costo_inicial }}
+                        <label for="floatingPassword">Costo inicial(opcional)</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating">
+                          {{ form.observacion }}
+                          <label for="floatingPassword">Observación</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating">
+                          {{ form.fecha_inicio }}
+                        <label for="floatingPassword">Fecha inicio</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-floating">
+                          {{ form.fecha_termino }}
+                        <label for="floatingPassword">Fecha termino</label>
+                        </div>
+                      </div>
+                      </div>
+                      </div>
+                    <br>
+                    <br>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Registrar proyecto</button>
+                    <br>
+                    <br>
+                    <a href="{% url 'listar_proyecto' %}" type="button" class="btn btn-warning">Volver</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+{% endblock onload %}
+{% endblock%}

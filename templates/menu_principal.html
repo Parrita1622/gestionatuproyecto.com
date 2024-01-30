@@ -1,0 +1,87 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% block title %}Menu_principal{% endblock %}
+{% block content %}
+<body style="background-image: url('/static/img/fondoMenuPrincipal.jpg'); background-size: cover; ">
+<br><br><br>
+{% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div class="row" style="margin-left: 30px;">
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);">
+                    <img src={% static 'img/factura_boleta.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registrar Factura/Boleta</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre o revise sus boletas y/o facturas mediante avanza el proyecto, la cual ayudara a tener mejor registro sobre los productos.</p>
+                    <a href="{% url 'boleta/factura' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);" >
+                    <img src={% static 'img/proyecto_maestro.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Mis proyectos/maestros</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre o revise sus proyectos y/o maestros con sus materiales y pagos correspondientes.</p>
+                    <br>
+                    <a href="{% url 'proyecto/maestro' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Revisar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);">
+                    <img src={% static 'img/materialesmp3.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" align="justify" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registrar material</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registra de manera individual los productos que vas adquiriendo a lo largo del proyecto, para luego asignarlos en algún proyecto especifico.</p>
+                    <a href="{% url 'registrar_material' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>                   
+        </div>
+    </div>
+</body>
+{% endblock %}

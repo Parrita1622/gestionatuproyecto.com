@@ -1,0 +1,150 @@
+{% extends "navbar.html" %}
+{% block title %}Listado boletas{% endblock %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block javascript %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+  function mensaje_eliminar(id, numero_boleta){
+    Swal.fire({
+      "title": "¡Seguro que desea eliminar boleta N°"+ numero_boleta +"!",
+      "text": "no se podrá deshacer la opción",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_boleta/"+id+"/";
+      }
+    })
+  };
+</script>
+{% endblock javascript %}
+<body style="background-image: url('/static/img/listado_factura.jpg'); background-size: cover;" >
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'Ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'Entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+    <br>
+    <br>
+    <br><br><br>
+    <h2 class="titulo_LFa" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 30 0px; color: rgb(2, 2, 2); font-size: 500%;">Listado boleta</h2>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-1">
+        <div class="col">
+          <a alt="Agregar producto" data-bs-toggle="modal" data-bs-target="#addItemModal" title="Asociar boleta" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(1, 126, 38); margin-left: 15px;">Asociar boleta</a>
+      <a href="{% url 'registrar_boleta' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 15px;">Registrar boleta</a>
+        </div>
+        <div class="col">
+          <form method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control buscador" name="search" placeholder="Buscar por numero de boleta" style=" border-radius: 5px;">
+                <button type="submit" class="btn btn-primary" style="margin-left: 10px; border-radius: 5px;">Buscar</button>
+            </div>
+        </form>
+        </div>
+        {% if not resultados_existentes %}
+         <div class="alert alert-danger" role="alert">No se encontraron boletas que coincidan con la búsqueda.</div>
+        {% endif %}
+      </div>
+      <br>
+      <br>
+        {% if boleta %}
+        <div class="container">
+          <div style="overflow-x: hidden; max-height: 1600px;">
+            <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3" >
+              {% for bol in boleta %}
+              <div class="col">
+              <div class="card card_listar_factura" style="width: 18rem;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>N° Boleta:</strong> {{bol.numero_boleta}}</h5>
+                      <p class="car-text"><h5>Tipo boleta:</h5> {{bol.tipo_boleta}}</p>
+                      <hr>
+                      <p class="car-text"><h5>Proveedor:</h5> {{bol.proveedor}}</p>
+                      <hr>
+                      <p class="card-text"><h5>F.Emisión:</h5> {{bol.fecha_emision}}</p>
+                      <hr>
+                      <p class="car-text"><h5>Total:</h5>${{bol.total|intcomma}}</p>
+                      <a href="#" class="btn btn-primary">Detalles</a>
+                      <a href="{% url 'actualizar_boleta' id=bol.id %}"><img src={% static 'img/lapiz.png' %} width="40px"></a>
+                      <a><img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar('{{bol.id}}', '{{bol.numero_boleta}}')" width="40px" style="margin-left: 15px; cursor: pointer;"></a>
+                      <a href="{% url 'vista_boleta' id=bol.id %}"><img src={% static 'img/lupa_factura.png' %} width="40" style="margin-left: 15px;"></a>
+                  </div>
+              </div>
+              <br>
+              </div>
+              {% endfor %}             
+            </div>
+            {% else %}
+                <div class="alert alert-info">No hay boletas creadas</div>
+            {% endif %}
+          </div>
+      </div>
+      <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Asociar boleta a proyecto:</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form id="itemForm" method="POST">
+                <div class="container"><div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
+                  {% csrf_token %}          
+                  <div class="col">
+                    {{form.username}}
+                    <div><h5>Numero boleta</h5></div>
+                  </div>
+                  <div class="col" >
+                    <div>{{form.numero_boleta}}</div>
+                  </div>
+                  <div class="col" >
+                    <div><h5>Proyecto</h5></div>
+                  </div>
+                  <div class="col" >
+                    <div >{{form.nombre_proyecto}}</div>
+                  </div>
+              </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+</body>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "navbar.html" %}
+{% block title %}Listado proyectos{% endblock %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block javascript %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+  function mensaje_eliminar(id, nombre){
+    Swal.fire({
+      "title": '¡Seguro que desea eliminar Proyecto:  '+ '"' +nombre+ '"'+"!",
+      "text": "no se podrá deshacer la opción",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/proyecto_eliminar/"+id+"/";
+      }
+    })
+  };
+</script>
+{% endblock javascript %}
+<body style="background-image: url('/static/img/listar_proyecto.jpg'); background-size: cover; ">
+  {% if messages %}
+  {% for m in messages %}
+    <script>
+      Swal.fire({
+        "title": "¡Bien hecho!",
+        "text": "{{m}}",
+        "icon": "success",
+        confirmButtonText: 'ok',
+        confirmButtonColor: 'rgb(17, 47, 236)'
+      })
+    </script>
+  {% endfor%}
+{% endif %}
+    <br>
+    <br>
+    <br><br><br>
+    <h2 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 50 0 30 0px; color: rgb(2, 2, 2); font-size: 500%;">Listado proyectos</h2>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-1">
+        <div class="col">
+          <a href="{% url 'formulario_proyecto' %}" type="submit" class="btn btn-primary btn-sm " style="background-color: rgb(22, 41, 252); margin-left: 3rem;">Registrar proyecto</a>
+        </div>
+        <div class="col">
+          <form method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control buscador" name="search" placeholder="Buscar por nombre proyecto" style=" border-radius: 5px;">
+                <button type="submit" class="btn btn-primary" style="margin-left: 10px; border-radius: 5px;">Buscar</button>
+            </div>
+        </form>
+        </div>
+        {% if not resultados_existentes %}
+         <div class="alert alert-danger" role="alert">No se encontraron proyectos que coincidan con la búsqueda.</div>
+        {% endif %}
+      </div>
+      <br>
+      <br>
+        {% if proyecto %}
+        <div style="overflow-x: hidden; max-height: 1600px;">
+          <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-5" >
+            {% for pro in proyecto %}
+            <div class="col">
+              <div class="card" style="width: 18rem; margin-left: 50px;">
+                <img src={% static 'img/proyectos.jpg' %} class="card-img-top" alt="...">
+                
+                <div class="card-body">
+                  <h5 class="card-title">Proyecto : {{ pro.nombre }}</h5>
+                  <p class="card-text"><h6>Fecha inicio:</h6> {{ pro.fecha_inicio }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><h5>Superficie: </h5>{{ pro.superficie }}m2</li>
+                  <li class="list-group-item"><h5>Costo inicial: </h5>${{ pro.costo_inicial|intcomma }}</li>
+                </ul>
+                <div class="card-body">
+                  <a href="{% url 'actualizar_proyecto' id=pro.id %}"><img src={% static 'img/lapiz.png' %} class="lapiz" title="Actualizar proyecto"></a>
+                  <a><img src={% static 'img/eliminar.png' %} style="margin-left: 10px; cursor: pointer;" onclick="mensaje_eliminar('{{pro.id}}', '{{pro.nombre}}')" class="basurero" title="Eliminar proyecto"></a>
+                  <a href="{% url 'vista_proyecto' id=pro.id %}"><button type="submit" class="btn btn-primary" style="margin-left: 20px;">Detalles</button></a>
+                </div>
+                
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+      {% else %}
+          <div class="alert alert-info">No hay Proyectos creados</div>
+      {% endif %}
+        </div>
+    </div>
+    <br>
+    <br>
+</body>
+{% endblock %}

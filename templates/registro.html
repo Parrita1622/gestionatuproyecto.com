@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}Registro usuario{% endblock %}
+{% load crispy_forms_tags %}
+{% block body %}
+<section style="background-image: url(../static/img/registro.jpg); background-size: cover;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: rgba(248, 248, 248, 0.878);">
+          <div class="card-body p-5 text-center" >
+            <h3 class="mb-5" style="color: #100f0f;">Registro de usuario</h3>
+            <!-- Agregar mensajes de error aquí -->
+            {% if messages %}
+            <div class="alert alert-danger">
+              <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            <form id="formularioReistro" action="{% url 'registro' %}" method="POST">
+              {% csrf_token %}
+              <table class="table">
+                <div class="form-floating mb-3">
+                    {{ form.username}}
+                    <label for="floatingInput">Nombre de usuario</label>
+                  </div>
+                <div class="form-floating mb-3">
+                    {{ form.first_name }}                   
+                    <label for="floatingInput">Nombre</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    {{ form.last_name}}
+                    <label for="floatingInput">Apellido</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    {{ form.email}}
+                    <label for="floatingInput">Correo Electronico</label>
+                  </div>
+                <div class="form-floating mb-3">
+                    {{ form.password}}
+                    <label for="floatingInput">Contraseña</label>
+                  </div>
+             </table>
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Registrarse</button>
+              <br>
+              <br>
+              <a onclick="window.history.back();" type="button" class="btn btn-warning">Volver</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

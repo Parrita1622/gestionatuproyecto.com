@@ -1,0 +1,63 @@
+{% extends "navbar.html" %}
+{% block title %}Contáctanos{% endblock %}
+{% load static %}
+{% block content %}
+{% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+<body style="background-image: url(../static/img/fondoMenuPrincipal.jpg); background-size: cover; margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="left-column col-md-6 order-md-1">
+                <div class="texto-formulario">
+                    <h1>Contáctanos</h1>
+                    <p>Si tienes alguna pregunta, comentario o forma en que podemos<br> mejorar, no dudes en escribirnos.</p>
+                </div>
+            </div>
+            <div class="right-column col-md-6 order-md-2">
+                <form action="{% url 'contacto' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" required></textarea>
+                    </div>
+                    <button class="boton-formulario" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br><br>
+</body>
+{% endblock %}

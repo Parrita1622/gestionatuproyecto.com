@@ -1,0 +1,148 @@
+{% extends "navbar.html" %}
+{% block title %}Listado facturas{% endblock %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% block javascript %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+  function mensaje_eliminar(id, numero_factura){
+    Swal.fire({
+      "title": "¡Seguro que desea eliminar factura N°"+ numero_factura +"!",
+      "text": "no se podrá deshacer la opción",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_factura/"+id+"/";
+      }
+    })
+  };
+</script>
+{% endblock javascript %}
+<body style="background-image: url('/static/img/listado_factura.jpg'); background-size: cover;" >
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'Ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'Entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+    <br>
+    <br>
+    <br><br><br>
+    <h2 class="titulo_LFa" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 30 0px; color: rgb(2, 2, 2); font-size: 500%;">Listado factura</h2>
+    <br>
+    <br>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-1">
+        <div class="col">
+          <a alt="Agregar producto" data-bs-toggle="modal" data-bs-target="#addItemModal" title="Asociar factura" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(1, 126, 38); margin-left: 15px;">Asociar factura</a>
+          <a href="{% url 'registrar_factura' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 15px;">Registrar factura</a>
+        </div>
+        <div class="col">
+          <form method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control buscador" name="search" placeholder="Buscar por numero de factura" style=" border-radius: 5px;">
+                <button type="submit" class="btn btn-primary" style="margin-left: 10px; border-radius: 5px;">Buscar</button>
+            </div>
+        </form>
+        </div>
+        {% if not resultados_existentes %}
+         <div class="alert alert-danger" role="alert">No se encontraron facturas que coincidan con la búsqueda.</div>
+        {% endif %}
+      </div>
+      <br>
+      <br>
+        {% if factura %}
+        <div class="container">
+          <div style="overflow-x: hidden; max-height: 1600px;">
+            <div class="row row-cols-1 row-cols-lg-3 g-2 g-lg-3" >
+              {% for fac in factura %}
+              <div class="col">
+              <div class="card card_listar_factura" style="width: 18rem;">
+                  <div class="card-body">
+                      <h5 class="card-title"><strong>N° Factura:</strong> {{fac.numero_factura}}</h5>
+                      <p class="car-text"><h5>Proveedor:</h5> {{fac.proveedor}}</p>
+                      <p class="card-text"><h5>F.Emisión:</h5> {{fac.fecha_emision}}</p>
+                      <p class="car-text"><h5>Cliente:</h5> {{fac.cliente}}</p>
+                      <p class="car-text"><h5>Número de contacto:</h5> {{fac.numero_contacto}}</p>
+                      <p class="car-text"><h5>Total:</h5>${{fac.total|intcomma}}</p>
+                      <a href="{% url 'actualizar_factura' id=fac.id %}"><img src={% static 'img/lapiz.png' %} width="40px" title="Actualizar factura"></a>
+                      <a><img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar('{{fac.id}}', '{{fac.numero_factura}}')" width="40px" style="margin-left: 15px; cursor: pointer;" title="Eliminar factura"></a>
+                      <a href="{% url 'vista_factura' id=fac.id %}"><img src={% static 'img/lupa_factura.png' %} width="40" style="margin-left: 15px;" title="Ver factura"></a>
+                  </div>
+              </div>
+              <br>
+              </div>
+              {% endfor %}             
+            </div>
+            {% else %}
+                <div class="alert alert-info">No hay facturas creadas</div>
+            {% endif %}
+          </div>
+      </div>
+          <!-- Modal Ingresar Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Asociar factura a proyecto:</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form id="itemForm" method="POST">
+            <div class="container"><div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-3">
+              {% csrf_token %}          
+              <div class="col">
+                {{form.username}}
+                <div><h5>Numero factura</h5></div>
+              </div>
+              <div class="col" >
+                <div>{{form.numero_factura}}</div>
+              </div>
+              <div class="col" >
+                <div><h5>Proyecto</h5></div>
+              </div>
+              <div class="col" >
+                <div >{{form.nombre_proyecto}}</div>
+              </div>
+          </form>
+      </div>
+      <br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" form="itemForm" class="btn btn-primary">Ingresar</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <br>
+    <br>
+</body>
+{% endblock %}

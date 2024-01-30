@@ -1,0 +1,83 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.1/css/bootstrap.min.css" integrity="sha512-0smfgDf7L/B8WtfxAA7Vq3Hu0E3fV+iZntY+1VVvq5d5/b+NL5jCm//9L9egnCZBzBlCG72mGZwFxMnB6fkzw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'cabin_APP/css/styles.css' %}">
+    <link rel="icon" href="../static/img/logo_99.png" type="image/png">
+    <nav class="fixed-top">
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+          <i class="fas fa-bars" style="padding-top: 20px;"></i>
+      </label>
+      <div class="enlace" >
+          <img src="../static/img/logo2.png" alt=""  class="logo" >
+      </div>
+      <ul style="margin-top: 17px;">
+          <li><a href="{% url 'menu_principal' %}">Inicio</a></li>
+          <li><a href="{% url 'listar_proyecto' %}">Mis proyectos</a></li>
+          <li><a href="{% url 'listar_maestro' %}">Mis maestros</a></li>
+          <li><a href="{% url 'boleta/factura' %}">Factura/Boleta</a></li>
+          <li><a href="{% url 'listar_materiales' %}">Materiales</a></li>
+          <li class="dropdown">
+              <a href="#" class="dropdown-btn">Opciones</a>
+              <div class="dropdown-content" style="border-radius: 5px; ">
+                  <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajustes</a>
+                  <a href="{% url 'contacto' %}">Contáctanos</a>
+                  <a href="{% url 'salir' %}">Cerrar sesión</a>
+              </div>
+          </li>
+          <li>
+              <img src="../static/img/usuario.png" alt="" width="30px">
+          </li>
+          <li><div style="color: rgb(239, 239, 13); font-size: 125%;">{{user.username}}</div></li>
+          <li><div style="color: rgb(239, 239, 13); font-size: 99%;">ID {{user.id}}</div></li>
+      </ul>
+  </nav>
+</head>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Menu configuración</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <h2 class="fs-5" style="margin-bottom: 30px;">Privacidad:</h2>
+          <a href="{% url 'cambiar_contrasenea'%}" role="button" class="btn btn-warning" data-bs-toggle="popover" title="Popover title">Cambiar contraseña</a>
+          <a href="{% url 'historial_usuario'%}" role="button" class="btn btn-warning" data-bs-toggle="popover" title="Popover title">Historial</a>
+          <hr>
+          <h2 class="fs-5" style="margin-bottom: 30px;">Perfil:</h2>
+          <a href="{% url 'cambiar_nombre'%}" role="button" class="btn btn-info" data-bs-toggle="popover" title="Popover title">Cambiar nombre usuario</a>
+          <a href="{% url 'cambiar_email'%}" role="button" class="btn btn-info" data-bs-toggle="popover" title="Popover title">Cambiar correo email</a>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<body style="background-image: url(../static/img/fondoMenuPrincipal.jpg); background-size: cover;">
+    <h2 style="text-align: center; font-size: 400%; margin-top: 100px; color: rgb(2, 2, 2);">Historial de Actividad</h2>
+    <div class="container " style="padding: 5%; ">
+      <div class="col-12 col-md-8 col-lg-12 col-xl-11">
+        <div class="card" style="border-radius: 2rem; background-color: rgba(254, 254, 254, 0.656); ">
+            <div style="padding: 2%; margin-left: 30px; font-size: 110%; overflow-x: hidden; max-height: 483px;">
+                <hr>
+                {% for log in activity_log %}
+                <br>
+                <strong>*{{ log.activity_type }}</strong> - {{ log.timestamp }}
+                <br><br>
+                <p>{{ log.details }}</p>
+                <br>
+                <hr>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+</body>

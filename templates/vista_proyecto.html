@@ -1,0 +1,453 @@
+{% extends "navbar.html" %}
+{% block title %}Vista proyecto{% endblock %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+{% block javascript %}
+<script type="text/javascript">
+
+  function mensaje_eliminar(id, nombre){
+    Swal.fire({
+      "title": '¡Seguro/a que desea eliminar material: '+ '"' +nombre+ '"'+"!",
+      "text": "Al eliminar el material su cantidad se devolvera a materiales disponibles",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_material_asociado/"+id+"/";
+      }
+    })
+  };
+
+  function mensaje_eliminar_factura(id, numero_factura){
+    Swal.fire({
+      "title": '¡Seguro/a que desea eliminar factura N°: '+ '"' +numero_factura+ '"'+"!",
+      "text": "La factura se eliminara del proyecto asociado",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_factura_asociada/"+id+"/";
+      }
+    })
+  };
+
+  function mensaje_eliminar_boleta(id, numero_boleta){
+    Swal.fire({
+      "title": '¡Seguro/a que desea eliminar boleta N°: '+ '"' +numero_boleta+ '"'+"!",
+      "text": "La boleta se eliminara del proyecto asociado",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_boleta_asociada/"+id+"/";
+      }
+    })
+  };
+  
+  function mensaje_eliminar_maestro(id, nombre_maestro){
+    Swal.fire({
+      "title": '¡Seguro/a que desea eliminar maestro/a: '+ '"' +nombre_maestro+ '"'+"!",
+      "text": "El maestro se eliminara del proyecto asociado",
+      "icon": "warning",
+      confirmButtonText: 'eliminar',
+      confirmButtonColor: 'red',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      cancelButtonColor: 'blue'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_maestro_asociado/"+id+"/";
+      }
+    })
+  };
+
+</script>
+{% endblock javascript %}
+<body style="background-image: url('/static/img/vista_proyecto1.jpg'); background-size: cover; ">
+  {% if messages %}
+  <div>
+    {% for message in messages %}
+      {% if message.tags == 'success' %}
+        <script>
+          Swal.fire({
+            "title": "¡Bien hecho!",
+            "text": "{{ message }}",
+            "icon": "success",
+            confirmButtonText: 'Ok',
+            confirmButtonColor: 'rgb(17, 47, 236)'
+          })
+        </script>
+      {% elif message.tags == 'error' %}
+        <script>
+          Swal.fire({
+            "title": "¡Error en el formulario!",
+            "text": "{{ message }}",
+            "icon": "error",
+            confirmButtonText: 'Entendido',
+            confirmButtonColor: 'rgb(236, 17, 17)'
+          })
+        </script>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+    <section class="vh-100" style="margin-top: 140px;">
+        <div class="container">
+          <div class="row">
+            <div class="col">   
+                <div class="container text-center" >
+                  <div class="row d-flex justify-content-center align-items-center h-100" style="padding-bottom: 50px;">
+                      <div class="card shadow-2-strong" style="border-radius: 2rem; background-color: rgba(254, 254, 254, 0.622); padding-bottom: 50px;">
+                        <div class="card-body p-5 text-center">
+                          <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-1">
+                            
+                            <div class="fechaIN" style="font-size: 100%; ">Fecha de inicio: {{proyecto.fecha_inicio}}</div>
+                            <div class="fechaTE" style="font-size: 100%; ">Fecha de termino: {{proyecto.fecha_termino}}</div>
+                          </div>
+                          <br>
+                          <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 50 0px; color: rgb(2, 2, 2); font-size: 450%; text-decoration: underline;">{{proyecto.nombre}}</h1>
+                          <div style="font-size: 140%; text-decoration: underline;">Metros cuadrados: {{proyecto.superficie}}m2</div>
+                          <br><br>
+                          <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:left; margin: 0 0 50 0px; color: rgb(2, 2, 2); font-size: 250%; ">Observación del proyecto:</h1>
+                          <div style="text-align: justify; font-size: 140%; font-family:'Times New Roman', Times, serif;">{{proyecto.observacion}}</div>
+                          <br><br>
+                          <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2">
+                            <div class="col">
+                              <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:left;  color: rgb(2, 2, 2); font-size: 250%; ">Materiales del proyecto:</h1>
+                            </div>
+                            <div class="col" >
+                              <a href="{% url 'listar_materiales' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 55%; margin-top: 15px;">Mis materiales</a>
+                            </div>
+                          </div>
+                          <br>
+                          {% if asociaciones %}
+                          <div style="overflow-x: auto; max-height: 400px;">
+                            <table class="table table-dark table-striped">
+                              <thead>
+                                  <tr>
+                                      <th>ID</th>
+                                      <th>Nombre del Material</th>
+                                      <th>Cantidad</th>
+                                      <th>Precio U.</th>
+                                      <th>Proveedor</th>
+                                      <th>Observación</th>
+                                      <th>Opciones</th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  {% for a in asociaciones %}
+                                  <tr>
+                                      <th>{{a.id}}</th>
+                                      <td>{{ a.material.nombre }}</td>
+                                      <td>{{ a.cantidad }}</td>
+                                      <td>${{ a.material.precio|intcomma }}</td>
+                                      <td>{{ a.material.lugar_de_compra }}</td>
+                                      <td>{{ a.material.observacion }}</td>
+                                      <td style="width: 20px;">
+                                          <a href="#" data-bs-toggle="modal" data-bs-target="#modal-actualizar-{{ a.id }}">
+                                              <img src="{% static 'img/lapiz.png' %}" width="40" title="Actualizar material">
+                                          </a>
+                                      </td>
+                                      <td>
+                                          <a><img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar('{{a.id}}', '{{a.material.nombre}}')" width="40" title="eliminar material asociado" style="cursor: pointer;"></a>
+                                      </td>
+                                  </tr>
+                                  <!-- Modal de Actualización -->
+                                  <div class="modal fade" id="modal-actualizar-{{ a.id }}" tabindex="-1" aria-labelledby="modal-actualizar-{{ a.id }}-label" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h5 class="modal-title" id="modal-actualizar-{{ a.id }}-label">Actualizar Cantidad de Material</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                              </div>
+                                              <div class="modal-body">
+                                                  <form action="{% url 'actualizar_material_asociado' a.id %}" method="post">
+                                                      {% csrf_token %}
+                                                      <label for="nueva-cantidad">Nueva Cantidad:</label>
+                                                      <input type="number" id="nueva-cantidad" name="nueva_cantidad" value="{{ a.cantidad }}" required>
+                                                      <button type="submit" class="btn btn-primary">Actualizar</button>
+                                                  </form>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  {% endfor %}
+                              </tbody>
+                          </table>
+                          </div>
+                        {% else %}
+                          <div class="alert alert-info">No hay materiales asociados a este proyecto</div>
+                        {% endif %}
+                        <br>
+                        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2">
+                          <div class="col">
+                            <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:left;  color: rgb(2, 2, 2); font-size: 250%; ">Facturas del proyecto:</h1>
+                          </div>
+                          <div class="col" >
+                            <a href="{% url 'listar_factura' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 55%; margin-top: 15px;">Mis facturas</a>
+                          </div>
+                        </div>
+                        <br>
+                        {% if facturas %}
+                        <div style="overflow-x: auto; max-height: 400px;">
+                          <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Número de Factura</th>
+                                    <th>Fecha de Emisión</th>
+                                    <th>Proveedor</th>
+                                    <th>Total</th>
+                                    <th>Opciones</th>
+                                    <th></th>
+                                    <th></th>
+                                    <!-- ... otras columnas ... -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fac in facturas %}
+                                <tr>
+                                    <td>{{fac.numero_factura.id}}</td>
+                                    <td>N° {{ fac.numero_factura }}</td>
+                                    <td>{{ fac.numero_factura.fecha_emision }}</td>
+                                    <td>{{ fac.numero_factura.proveedor }}</td>
+                                    <td>${{ fac.numero_factura.total|intcomma }}</td>
+                                    <td style="width: 20px;">
+                                      <a href="{% url 'actualizar_factura' id=fac.numero_factura.id %}"><img src={% static 'img/lapiz.png' %} width="40px" title="Actualizar factura"></a>
+                                    </td>
+                                    <td style="width: 20px;">
+                                      <a href="{% url 'vista_factura' id=fac.numero_factura.id %}"><img src={% static 'img/lupa_factura.png' %} width="40px" title="Ver factura" style="margin-right: 20px;"></a>
+                                    </td>
+                                    <td style="width: 0px;">
+                                      <img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar_factura('{{fac.id}}', '{{fac.numero_factura}}')" width="40" title="eliminar factura asociada" style="cursor: pointer;">
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">No hay facturas asociadas a este proyecto</div>
+                        {% endif %}
+                        <br>
+                        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2">
+                          <div class="col">
+                            <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:left;  color: rgb(2, 2, 2); font-size: 250%; ">Boletas del proyecto:</h1>
+                          </div>
+                          <div class="col" >
+                            <a href="{% url 'listar_boleta' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 55%; margin-top: 15px;">Mis boletas</a>
+                          </div>
+                        </div>
+                        <br>
+                        {% if boletas %}
+                        <div style="overflow-x: auto; max-height: 400px;">
+                          <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Número de boleta</th>
+                                    <th>Fecha de Emisión</th>
+                                    <th>Proveedor</th>
+                                    <th>Total</th>
+                                    <th>Opciones</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for bol in boletas %}
+                                <tr>
+                                    <td>{{bol.numero_boleta.id}}</td>
+                                    <td>N° {{ bol.numero_boleta }}</td>
+                                    <td>{{ bol.numero_boleta.fecha_emision }}</td>
+                                    <td>{{ bol.numero_boleta.proveedor }}</td>
+                                    <td>${{ bol.numero_boleta.total|intcomma }}</td>
+                                    <td style="width: 20px;">
+                                      <a href="{% url 'actualizar_boleta' id=bol.numero_boleta.id %}"><img src={% static 'img/lapiz.png' %} width="40px" title="Actualizar boleta"></a>
+                                    </td>
+                                    <td style="width: 20px;">
+                                      <a href="{% url 'actualizar_boleta' id=bol.id %}"><img src={% static 'img/lupa_factura.png' %} width="40px" title="Ver boleta" style="margin-right: 20px;"></a>
+                                    </td>
+                                    <td style="width: 0px;">
+                                      <img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar_boleta('{{bol.id}}', '{{bol.numero_boleta}}')" width="40" title="eliminar boleta asociada" style="cursor: pointer;">
+                                  </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">No hay boletas asociadas a este proyecto</div>
+                        {% endif %}
+                        <br>
+                        <div class="row row-cols-1 row-cols-lg-2 g-2 g-lg-2">
+                          <div class="col">
+                            <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:left;  color: rgb(2, 2, 2); font-size: 250%; ">Maestros del proyecto:</h1>
+                          </div>
+                          <div class="col" >
+                            <a href="{% url 'listar_maestro' %}" type="submit" class="btn btn-primary btn-sm" style="background-color: rgb(22, 41, 252); margin-left: 55%; margin-top: 15px;">Mis maestros</a>
+                          </div>
+                        </div>
+                        <br>
+                        {% if maestro %}
+                        <div style="overflow-x: auto; max-height: 400px;">
+                          <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Trabajo</th>
+                                    <th>Cobro maestro</th>
+                                    <th>Saldo inicial</th>
+                                    <th>Saldo a deber</th>
+                                    <th>Observación</th>
+                                    <th>Opciones</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for m in maestro  %}
+                                <tr>
+                                    <td>{{m.id}}</td> <!--m.nombre_maestro.id = id de maestro principal-->
+                                    <td>{{ m.nombre_maestro }}</td>
+                                    <td>{{ m.trabajo }}</td><!--m.trabajo es el trabajo que le doy al asociar-->
+                                    <td>${{ m.cobro_maestro|intcomma }}</td>
+                                    <td>${{ m.saldo_inicial|intcomma}}</td>
+                                    <td>${{ m.saldo_a_deber|intcomma}}</td>
+                                    <td>{{ m.observacion}}</td>
+                                    <td style="width: 20px;">
+                                      <a href="#" data-bs-toggle="modal" data-bs-target="#modal-actualizar-maestro-{{ m.id }}">
+                                        <img src="{% static 'img/lapiz.png' %}" width="40" title="Actualizar maestro">
+                                      </a>
+                                    </td>
+                                    <td style="width: 0px;">
+                                      <img src={% static 'img/eliminar.png' %} onclick="mensaje_eliminar_maestro('{{m.id}}', '{{m.nombre_maestro}}')" width="40" title="eliminar boleta asociada" style="cursor: pointer;">
+                                  </td>
+                                <td></td>
+                                </tr>
+                                <div class="modal fade" id="modal-actualizar-maestro-{{ m.id }}" tabindex="-1" aria-labelledby="modal-actualizar-maestro-{{ m.id }}-label" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="modal-actualizar-maestro-{{ m.id }}-label">Actualizar Maestro:</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form id="itemForm-{{ m.id }}" action="{% url 'actualizar_maestro_asociado' m.id %}" method="post">
+                                          {% csrf_token %}        
+                                          <div class="container">
+                                            <div class="row row-cols-2 row-cols-lg-2 g-2 g-lg-2">
+                                              <div class="col">
+                                                <div><h5>Trabajo a realizar:</h5></div>
+                                              </div>
+                                              <div class="col">
+                                                <div class="form-floating mb-3">
+                                                  <input type="text" class="form-control" id="nuevo-trabajo" placeholder="sdafds" name="nuevo_trabajo" value="{{ m.trabajo }}" required>
+                                                  <label for="floatingInput">Nuevo trabajo</label>
+                                                </div>
+                                              </div>
+                                              <div class="col">
+                                                <div><h5>Cobro maestro:</h5></div>
+                                              </div>
+                                              <div class="col" >
+                                                <div class="form-floating mb-3">
+                                                  <input type="number" class="form-control" id="nuevo-cobro" placeholder="sdafds" name="nuevo_cobro" value="{{ m.cobro_maestro }}" required>
+                                                  <label for="floatingInput">Cobro maestro</label>
+                                                </div>
+                                              </div>
+                                              <div class="col">
+                                                <div><h5>Saldo inicial:</h5></div>
+                                              </div>
+                                              <div class="col" >
+                                                <div class="form-floating mb-3">
+                                                  <input type="number" class="form-control" id="nuevo-saldo-inicial" placeholder="sdafds" name="nuevo_saldo_inicial" value="{{ m.saldo_inicial }}" required>
+                                                  <label for="floatingInput">Saldo inicial</label>
+                                                </div>
+                                              </div>
+                                              <div class="col">
+                                                <div><h5>Saldo a deber:</h5></div>
+                                              </div>
+                                              <div class="col" >
+                                                <div class="form-floating mb-3">
+                                                  <input type="number" class="form-control" id="nuevo-saldo-adeber" placeholder="sdafds" name="nuevo_saldo_adeber" value="{{ m.saldo_a_deber }}" required>
+                                                  <label for="floatingInput">Saldo a deber</label>
+                                                </div>
+                                              </div>
+                                              <div class="col">
+                                                <div><h5>Observación:</h5></div>
+                                              </div>
+                                              <div class="col" >
+                                                <div class="form-floating mb-3">
+                                                  <textarea type="text" class="form-control" id="nueva_observacion" placeholder="sdafds" name="nueva_observacion" required>{{m.observacion}}</textarea>
+                                                  <label for="floatingInput">Observacion</label>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" form="itemForm-{{ m.id }}" class="btn btn-primary">Actualizar</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                        {% else %}
+                        <div class="alert alert-info">No hay maestros asociados a este proyecto</div>
+                        {% endif %}
+                        <br>
+                        <br>
+                        <h1 id="titulo" style="font-family:'Times New Roman', Times, serif; text-align:center; margin: 0 0 50 0px; color: rgb(2, 2, 2); font-size: 300%; text-decoration: underline;">Resumen:</h1>
+                        <div style="overflow-x: auto; max-height: 400px;">
+                          <table class="table table-dark table-striped">
+                            <thead>
+                                <tr><th></th>
+                                    <th>Nombre proyecto</th>
+                                    <th>M2</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha termino</th>
+                                    <th>Presupuesto</th>
+                                    <th>Costo total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td></td>
+                                    <td>{{ proyecto.nombre }}</td>
+                                    <td>{{ proyecto.superficie }} m2</td>
+                                    <td>{{ proyecto.fecha_inicio }}</td>
+                                    <td>{{ proyecto.fecha_termino}}</td>
+                                    <td>${{ proyecto.costo_inicial|intcomma}}</td>
+                                    <td>${{ total_general|intcomma }}</td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>  
+      </section>
+</body>
+{% endblock %}

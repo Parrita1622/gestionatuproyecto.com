@@ -1,0 +1,46 @@
+{% extends "navbar.html" %}
+{% load static %}
+{% block title %}Menu boleta/factura{% endblock %}
+{% block content %}
+<body style="background-image: url('/static/img/fondoMenuPrincipal.jpg'); background-size: cover; ">
+<div style="margin-top: 7%;"></div>
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <div class="row" style="margin-left: 15%;">
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);">
+                    <img src={% static 'img/factura.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Mis facturas</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre y/o revise sus facturas registradas anteriormente.</p>
+                    <a href="{% url 'registrar_factura' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    <a href="{% url 'listar_factura' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252); margin-left: 10px;">Visualizar</a>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col">
+                <br>
+                <br>
+                <br>
+                <div class="card" style="width: 20rem; background-color: rgba(4, 30, 53, 0.635);" >
+                    <img src={% static 'img/boleta.jpg' %} class="card-img-top" alt="...">
+                    <div class="card-body">
+                    <h5 class="card-title" style="color: white; font-family: Arial, Helvetica, sans-serif;">Mis boletas</h5>
+                    <p class="card-text" style="color: white; font-family: Arial, Helvetica, sans-serif;">Registre y/o revise sus boletas registradas anteriormente.</p>
+                    <a href="{% url 'registrar_boleta' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252);">Registrar</a>
+                    <a href="{% url 'listar_boleta' %}" class="btn btn-primary" style="background-color: rgb(22, 41, 252); margin-left: 10px;">Visualizar</a>
+                    
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </div>
+    <br><br><br>
+</body>
+{% endblock %}
